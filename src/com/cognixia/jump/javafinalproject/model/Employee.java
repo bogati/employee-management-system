@@ -20,6 +20,7 @@ public class Employee implements Comparable<Employee> {
 		this(departmentId, lastName, firstName, age, 
 				position, salary, email, phone, address);
 		this.userId = userID;
+		USER_ID = userID + 1;
 	}
 	
 	public Employee(long departmentId, String lastName, String firstName, 
