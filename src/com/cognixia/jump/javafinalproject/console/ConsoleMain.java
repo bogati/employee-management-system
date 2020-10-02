@@ -1,8 +1,7 @@
 package com.cognixia.jump.javafinalproject.console;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import com.cognixia.jump.javafinalproject.model.*;
 
 public class ConsoleMain {
 	
@@ -14,7 +13,9 @@ public class ConsoleMain {
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
-		ConsoleManager consoleManger = new ConsoleManager(scan);
+		Company company = new Company("Team 2");
+		initializeCompany(company);
+		ConsoleManager consoleManger = new ConsoleManager(scan, company);
 		
 		System.out.println(WELCOME_MESSAGE);
 		String line;
@@ -24,12 +25,6 @@ public class ConsoleMain {
 			if (line.equalsIgnoreCase("exit"))
 				break ;
 			startConsole(line, consoleManger);
-			if (consoleManger.isAdded()) {
-				consoleManger
-					.getAnswers()
-					.stream()
-					.forEach(System.out::println);
-			}
 		}
 		scan.close();
 	}
@@ -58,5 +53,17 @@ public class ConsoleMain {
 		} catch (IllegalArgumentException e) {
 			System.out.println("Wrong command categlory");
 		}
+	}
+	
+	public static void initializeCompany(Company company) {
+		
+		Department department = new Department("Software", "389-234-2523", "USA", 1000000);
+		company.add(department);
+		department.add(new Employee(department.getDepartmentId(), "Bob", "Tom", 
+				100, "student", 100, "cj@gmaile.com", "234985", "USA"));
+		department.add(new Employee(department.getDepartmentId(), "Ted", "Jerry", 
+				100, "student", 100, "tj@gmaile.com", "234985", "USA"));
+		department.add(new Employee(department.getDepartmentId(), "Pop", "lis", 
+				100, "student", 100, "pl@gmaile.com", "234985", "USA"));
 	}
 }
