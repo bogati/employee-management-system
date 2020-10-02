@@ -9,13 +9,9 @@ public class AgeException extends Exception {
 			int age;
 			
 			AgeException(int age) {
-				super(age + "is an invalid entry.");
+				super(age + " is an invalid entry.");
 				this.age = age;
 			}
 		
-			public boolean Exception() {
-				return MAX_AGE >= age;
-			}
-			
 			
 }
