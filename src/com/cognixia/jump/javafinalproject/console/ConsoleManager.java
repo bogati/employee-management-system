@@ -125,4 +125,9 @@ public class ConsoleManager {
 	public boolean tempValidationCheck(String s) {
 		return true;
 	}
+
+
+	public boolean isReWrite() {
+		return reWrite;
+	}
 }

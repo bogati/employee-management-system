@@ -1,8 +1,8 @@
 package com.cognixia.jump.javafinalproject.model;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Company {
 
@@ -18,7 +18,7 @@ public class Company {
 		COMPANY_ID++;
 		this.name = name;
 		if (departments == null)
-			departments = new HashSet<Department>();
+			departments = new TreeSet<Department>();
 	}
 	
 	public void add(Department e) {

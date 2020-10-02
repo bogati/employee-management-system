@@ -1,6 +1,6 @@
 package com.cognixia.jump.javafinalproject.model;
 
-public class Employee {
+public class Employee implements Comparable<Employee> {
 	private static long USER_ID = 1;
 	private long userId;
 	private long departmentId;
@@ -37,6 +37,15 @@ public class Employee {
 		this.phone = phone;
 		this.address = address;
 		USER_ID++;
+	}
+	
+	public long getUserId() {
+		return userId;
+	}
+	
+	@Override
+	public int compareTo(Employee e) {
+		return (int)(getUserId() - e.getUserId());
 	}
 
 	// Implement toString for CSV file

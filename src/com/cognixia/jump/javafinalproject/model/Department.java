@@ -1,9 +1,9 @@
 package com.cognixia.jump.javafinalproject.model;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class Department {
+public class Department implements Comparable<Department> {
 
 	private static long DEPARTMENT_ID = 1;
 	private long departmentId;
@@ -26,7 +26,7 @@ public class Department {
 		this.address = address;
 		this.budget = budget;
 		DEPARTMENT_ID++;
-		if (employees == null) employees = new HashSet<Employee>();
+		if (employees == null) employees = new TreeSet<Employee>();
 	}
 	
 	public void add(Employee e) {
@@ -58,6 +58,11 @@ public class Department {
 	public String getName() {
 		return name;
 	}
+	
+    @Override
+    public int compareTo(Department d) {
+    	return (int)(getDepartmentId() - d.getDepartmentId());
+    }
 
 	@Override
 	public String toString() {
