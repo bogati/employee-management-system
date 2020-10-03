@@ -1,5 +1,7 @@
 package com.cognixia.jump.javafinalproject.console;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -10,34 +12,55 @@ import com.cognixia.jump.javafinalproject.model.*;
 
 public class ConsoleMain {
 	
-	public static final String WELCOME_MESSAGE = "Hello, welcome to Team 2 \n";
-	public static final String MENU_CATEGORY = 
-			"Please chose one of the commands\n" + 
-			"ADD, UPDATE, REMOVE, LIST, or EXIT to close the program";
+	
+	public static String HEADER_FILEPATH = "resources/header.txt";
+	public static String SIMPLE_INSTRUCTION = 
+			"Type ADD, UPDATE, REMOVE, LIST to continue \n" +
+			"HELP for more infromation\n\n";
 
 	public static void main(String[] args) {
 		
+		String instructions = displayHeader();
 		Company company = new Company("Team 2");
 		FileIO file = new FileIO();
 		initializeCompany(company, file);
 		Scanner scan = new Scanner(System.in).useDelimiter("\\n");
 		ConsoleManager consoleManager = new ConsoleManager(scan, company);
 		
-		System.out.println(WELCOME_MESSAGE);
+		System.out.println(instructions);
 		String line;
 		while (true) {
-			System.out.println(MENU_CATEGORY);
+			System.out.println(SIMPLE_INSTRUCTION);
 			line = scan.next();
 			if (line.equalsIgnoreCase("exit"))
 				break ;
-			startConsole(line, consoleManager);
+			startConsole(line, consoleManager, instructions);
 		}
 		scan.close();
 		storedCompany(company, file);
 	}
 	
+	private static String displayHeader() {
+		try {
+			File file = new File(HEADER_FILEPATH);
+			FileInputStream fis = new FileInputStream(file);
+			byte[] data = new byte[(int) file.length()];
+			fis.read(data);
+
+			String str = new String(data, "UTF-8");
+			fis.close();
+			return str;
+		} catch (FileNotFoundException e) {
+			System.out.println("Cannot open the header file");
+		} catch (IOException e) {
+			System.out.println("Cannot read the header file");
+		}
+		return "Opps. Header not working";
+
+	}
 	
-	private static void startConsole(String line, ConsoleManager consoleManger) {
+	private static void startConsole(String line, 
+			ConsoleManager consoleManger, String instructions) {
 		
 		try  {
 			Commands command = Commands.valueOf(line.toUpperCase());
@@ -53,6 +76,9 @@ public class ConsoleMain {
 				break;
 			case LIST:
 				consoleManger.list();
+				break;
+			case HELP:
+				System.out.println(instructions);
 				break;
 			default:
 				break;

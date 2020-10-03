@@ -6,6 +6,7 @@ public enum Commands {
 	REMOVE("remove"), 
 	LIST("list"), 
 	EXIT("exit"),
+	HELP("help"),
 	BACK("back");
 
 	private String command;

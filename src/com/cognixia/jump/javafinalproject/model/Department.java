@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import com.cognixia.jump.javafinalproject.console.EmployeeAttribute;
-import com.cognixia.jump.javafinalproject.console.ValidationAttribute;
+import com.cognixia.jump.javafinalproject.validation.ValidationAttribute;
 
 public class Department implements Comparable<Department> {
 
@@ -62,7 +62,7 @@ public class Department implements Comparable<Department> {
 				employee.setFirstName(updateValue);
 				break;
 			case AGE:
-				if (!ValidationAttribute.validWord(updateValue))
+				if (!ValidationAttribute.validNumber(updateValue))
 					break;
 				int age = Integer.parseInt(updateValue);
 				employee.setAge(age);
@@ -73,6 +73,8 @@ public class Department implements Comparable<Department> {
 				employee.setPosition(updateValue);
 				break;
 			case SALARY:
+				if (!ValidationAttribute.validNumber(updateValue))
+					break ;
 				double salary = Double.parseDouble(updateValue);
 				employee.setSalary(salary);
 				break;

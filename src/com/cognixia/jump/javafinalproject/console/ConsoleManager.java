@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 import com.cognixia.jump.javafinalproject.model.*;
+import com.cognixia.jump.javafinalproject.validation.ValidationAttribute;
 
 
 public class ConsoleManager {
@@ -51,7 +52,7 @@ public class ConsoleManager {
 			if (answer.equalsIgnoreCase(Commands.BACK.name())) {
 				return ;
 			}
-			if (!tempValidationCheck(answer)) i--;
+			if (!validationCheck(answer, categlory, i)) i--;
 			else answers.add(answer);
 		}
 		if (categlory.equalsIgnoreCase(Questions.CATEGORY[0]))				
@@ -64,8 +65,10 @@ public class ConsoleManager {
 		if (answers.size() != Questions.ADD_EMPLOYEE.length) 
 			return ;
 		try {
-			String firstName = answers.get(0);
-			String lastName = answers.get(1);
+			String firstName = ValidationAttribute
+					.changeFirstLetterUpper(answers.get(0));
+			String lastName = ValidationAttribute
+					.changeFirstLetterUpper(answers.get(1));
 			int age = Integer.parseInt(answers.get(2));
 			String position = answers.get(3);
 			double salary = Double.parseDouble(answers.get(4));
@@ -87,7 +90,8 @@ public class ConsoleManager {
 		if (answers.size() != Questions.ADD_DEPARTMENT.length) 
 			return ;
 		try {
-			String name = answers.get(0);
+			String name = ValidationAttribute
+					.changeFirstLetterUpper(answers.get(0));
 			String phone = answers.get(1);
 			String address = answers.get(2);
 			long budget = Long.parseLong(answers.get(3));
@@ -179,8 +183,6 @@ public class ConsoleManager {
 			String line = scan.next();
 			if (line.equalsIgnoreCase(Commands.BACK.name())) return ;
 			answers = Arrays.asList(line.split(" "));
-			System.out.println("line: " + line);
-			System.out.println("answers" + answers);
 			if (answers.size() >= 2) {
 				final String attribute = answers.get(0).toUpperCase();
 				final String updateValue = 
@@ -275,9 +277,84 @@ public class ConsoleManager {
 	}
 	
 	//TODO temp for testing
-	public boolean tempValidationCheck(String s) {
-		return true;
+	private boolean validationCheck(String updateValue, String categlory, int index) {
+		
+		if (categlory.equalsIgnoreCase(Questions.CATEGORY[0]))				
+			return validateEmployee(updateValue, index);
+		return validateDepartment(updateValue, index);
 	}
+	
+	private boolean validateEmployee(String updateValue, int index) {
+		EmployeeAttribute[] epAttribute = 
+				EmployeeAttribute.values();
+		switch (epAttribute[index]) {
+		case LASTNAME:
+			if (ValidationAttribute.validWord(updateValue))
+				return true;
+			break;
+		case FIRSTNAME:
+			if (ValidationAttribute.validWord(updateValue))
+				return true;
+			break;
+		case AGE:
+			if (ValidationAttribute.validNumber(updateValue))
+				return true;
+			break;
+		case POSITION:
+			if (ValidationAttribute.validWord(updateValue))
+				return true;
+			break;
+		case SALARY:
+			if (ValidationAttribute.validNumber(updateValue))
+				return true ;
+			break;
+		case EMAIL:
+			if (ValidationAttribute.validEmail(updateValue))
+				return true;
+			break;
+		case PHONE:
+			if (ValidationAttribute.validPhone(updateValue))
+				return true;
+			break;
+		case ADDRESS:
+			if (ValidationAttribute.validAddress(updateValue))
+				return true;
+			break;
+		default:
+			break;
+		}
+		return false;
+	}
+	
+	private boolean validateDepartment(String updateValue, int index) {
+		
+		DepartmentAttribute dpAttribute[] = 
+				DepartmentAttribute.values();
+		System.out.println("UpdateValue: "+ updateValue + " index: " + index);
+		System.out.println("attribute: " + dpAttribute[index]);
+		switch (dpAttribute[index]) {
+		case NAME:
+			if (ValidationAttribute.validWord(updateValue))
+				return true;
+			break;
+		case PHONE:
+			if (ValidationAttribute.validPhone(updateValue))
+				return true ;
+			break;
+		case ADDRESS:
+			if (ValidationAttribute.validAddress(updateValue))
+				return true ;
+			break;
+		case BUDGET:
+			if (ValidationAttribute.validNumber(updateValue))
+				return true;
+			break;
+		default:
+			break;
+		}
+		return false;
+	}
+	
 
 
 	public boolean isReWrite() {
