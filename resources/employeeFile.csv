@@ -1,3 +1,4 @@
 EmployeeId,DepartmentId,FirstName,LastName,Age,Phone,Salary,Email,Phone,Address
 1,1,Joe,Rock,55,Intern,0.0,Joe.Rock@gmail.com,345-345-3666,4451SE 11th St San Jose CA
 2,1,Bob,Lip,23,Manager,0.0,Bob.Lip@gmail.com,435-363-4567,878NE 3rd St Portland OR
+3,2,Bob,Peter,45,Manager,435666.0,Pd@gmail.com,555-444-5678,123 Stillbrew Ln

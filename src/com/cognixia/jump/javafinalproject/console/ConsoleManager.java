@@ -280,19 +280,22 @@ public class ConsoleManager {
 	private boolean validationCheck(String updateValue, String categlory, int index) {
 		
 		if (categlory.equalsIgnoreCase(Questions.CATEGORY[0]))				
-			return validateEmployee(updateValue, index);
+			return validateEmployee(updateValue, index + 1);
 		return validateDepartment(updateValue, index);
 	}
 	
 	private boolean validateEmployee(String updateValue, int index) {
 		EmployeeAttribute[] epAttribute = 
 				EmployeeAttribute.values();
+		System.out.println(Arrays.asList(epAttribute));
+		System.out.println("UpdateValue: "+ updateValue + " index: " + index);
+		System.out.println("attribute: " + epAttribute[index]);
 		switch (epAttribute[index]) {
-		case LASTNAME:
+		case FIRSTNAME:
 			if (ValidationAttribute.validWord(updateValue))
 				return true;
 			break;
-		case FIRSTNAME:
+		case LASTNAME:
 			if (ValidationAttribute.validWord(updateValue))
 				return true;
 			break;
@@ -330,8 +333,7 @@ public class ConsoleManager {
 		
 		DepartmentAttribute dpAttribute[] = 
 				DepartmentAttribute.values();
-		System.out.println("UpdateValue: "+ updateValue + " index: " + index);
-		System.out.println("attribute: " + dpAttribute[index]);
+
 		switch (dpAttribute[index]) {
 		case NAME:
 			if (ValidationAttribute.validWord(updateValue))

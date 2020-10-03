@@ -3,8 +3,8 @@ package com.cognixia.jump.javafinalproject.console;
 public enum EmployeeAttribute {
 	
 	DEPARTMENTID("DEPARTMENTID"),
-	LASTNAME("LASTNAME"),
 	FIRSTNAME("FIRSTNAME"),
+	LASTNAME("LASTNAME"),
 	AGE("AGE"),
 	POSITION("POSITION"),
 	SALARY("SALARY"),
