@@ -6,8 +6,8 @@ public class Employee implements Comparable<Employee> {
 	private static long USER_ID = 1;
 	private long userId;
 	private long departmentId;
-	private String lastName;
 	private String firstName;
+	private String lastName;
 	private int age;
 	private String position;
 	private double salary;
@@ -106,8 +106,8 @@ public class Employee implements Comparable<Employee> {
 	// Implement toString for CSV file
 	@Override
 	public String toString() {
-		return userId + "," + departmentId + "," + lastName
-				+ "," + firstName + "," + age + "," + position + "," + salary
+		return userId + "," + departmentId + "," + firstName
+				+ "," + lastName + "," + age + "," + position + "," + salary
 				+ "," + email + "," + phone + "," + address;
 	}
 	

@@ -64,8 +64,8 @@ public class ConsoleManager {
 		if (answers.size() != Questions.ADD_EMPLOYEE.length) 
 			return ;
 		try {
-			String lastName = answers.get(0);
-			String firstName = answers.get(1);
+			String firstName = answers.get(0);
+			String lastName = answers.get(1);
 			int age = Integer.parseInt(answers.get(2));
 			String position = answers.get(3);
 			double salary = Double.parseDouble(answers.get(4));
@@ -166,7 +166,7 @@ public class ConsoleManager {
 					department.remove(employee);
 					employee.setDepartmentId(departmentId);
 				} else department.update(attribute, 
-						updateValue, employee, department);
+						updateValue, employee);
 			}
 		}
 	}

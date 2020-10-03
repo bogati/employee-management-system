@@ -46,7 +46,7 @@ public class Department implements Comparable<Department> {
 	}
 	
 	public void update(String attribute, String updateValue, 
-			Employee employee, Department department) {
+			Employee employee) {
 		try {
 			EmployeeAttribute epAttribute = 
 					EmployeeAttribute.valueOf(attribute);
@@ -111,6 +111,10 @@ public class Department implements Comparable<Department> {
 	}
 	
 	// Getter and Setter methods
+	
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
 	public long getDepartmentId() {
 		return departmentId;
 	}
@@ -172,10 +176,5 @@ public class Department implements Comparable<Department> {
 	public String toString() {
 		return departmentId + "," + name + "," + phone + ","
 				+ address + "," + budget;
-	}
-	
-	public String toString1() {
-		return departmentId + "," + name + "," + phone + ","
-				+ address + "," + budget + employees;
 	}
 }

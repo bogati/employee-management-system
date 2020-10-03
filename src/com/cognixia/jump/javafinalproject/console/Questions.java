@@ -12,8 +12,8 @@ public final class Questions {
 	
 	public static final String[] ADD_EMPLOYEE = {
 
-			"Enter Last Name:", 
 			"Enter First Name:", 
+			"Enter Last Name:", 
 			"Enter Age",
 			"Enter Position:",
 			"Enter Salary",

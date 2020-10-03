@@ -41,9 +41,6 @@ public class Company {
 	
 	public void update(String attribute, 
 			String updateValue, Department department) {
-//		if (departments.contains(o)) return ;
-//		departments.remove(o);
-//		departments.add(n);
 		try  {
 			DepartmentAttribute dpAttribute = 
 					DepartmentAttribute.valueOf(attribute);
@@ -81,6 +78,10 @@ public class Company {
 	public void list() {
 		if (departments.size() == 0) return ;
 		departments.parallelStream().forEach(System.out::println);
+	}
+	
+	public Set<Department> getDepartments() {
+		return departments;
 	}
 	
 	public Department findDepartment(long departmentId) {
