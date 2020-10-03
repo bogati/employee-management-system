@@ -4,6 +4,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.cognixia.jump.javafinalproject.console.DepartmentAttribute;
+import com.cognixia.jump.javafinalproject.console.ValidationAttribute;
+
 public class Company {
 
 	private static long COMPANY_ID = 1;
@@ -27,14 +30,52 @@ public class Company {
 	}
 	
 	public void remove(Department e) {
+		if (e.numOfEmployee() != 0) {
+			System.out.println("There still have employee in the department");
+			return ;
+		}
 		if (!departments.contains(e)) return ;
 		departments.remove(e);
+		System.out.println("Remove: " + e);
 	}
 	
-	public void update(Department o, Department n) {
-		if (departments.contains(o)) return ;
-		departments.remove(o);
-		departments.add(n);
+	public void update(String attribute, 
+			String updateValue, Department department) {
+//		if (departments.contains(o)) return ;
+//		departments.remove(o);
+//		departments.add(n);
+		try  {
+			DepartmentAttribute dpAttribute = 
+					DepartmentAttribute.valueOf(attribute);
+			switch (dpAttribute) {
+			case NAME:
+				if (!ValidationAttribute.validWord(updateValue))
+					break ;
+				department.setName(updateValue);
+				break;
+			case PHONE:
+				if (!ValidationAttribute.validPhone(updateValue))
+					break ;
+				department.setPhone(updateValue);
+				break;
+			case ADDRESS:
+				if (!ValidationAttribute.validAddress(updateValue))
+					break ;
+				department.setAddress(updateValue);
+				break;
+			case BUDGET:
+				if (!ValidationAttribute.validBudget(updateValue))
+					break ;
+				long budget = Long.parseLong(updateValue);
+				department.setBudget(budget);
+				break;
+			default:
+				System.out.println("Default attribute categlory");
+				break;
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println("Wrong department attribute categlory");
+		}
 	}
 
 	public void list() {
@@ -53,7 +94,6 @@ public class Company {
 	
 	public Department findDepartment(String name) {
 		
-		System.out.println("name: " + name);
 		Optional<Department> department = departments.parallelStream()
 			.filter(dep -> name.equalsIgnoreCase(dep.getName()))
 			.findFirst();

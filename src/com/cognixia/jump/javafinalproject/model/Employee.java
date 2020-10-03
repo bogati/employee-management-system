@@ -1,5 +1,7 @@
 package com.cognixia.jump.javafinalproject.model;
 
+import java.util.Optional;
+
 public class Employee implements Comparable<Employee> {
 	private static long USER_ID = 1;
 	private long userId;
@@ -8,14 +10,14 @@ public class Employee implements Comparable<Employee> {
 	private String firstName;
 	private int age;
 	private String position;
-	private int salary;
+	private double salary;
 	private String email;
 	private String phone;
 	private String address;
 	
 	public Employee(long userID, long departmentId, String lastName, 
 			String firstName, int age, String position,
-			int salary, String email, String phone, String address) {
+			double salary, String email, String phone, String address) {
 		
 		this(departmentId, lastName, firstName, age, 
 				position, salary, email, phone, address);
@@ -24,7 +26,7 @@ public class Employee implements Comparable<Employee> {
 	}
 	
 	public Employee(long departmentId, String lastName, String firstName, 
-			int age, String position, int salary, String email, String phone, 
+			int age, String position, double salary, String email, String phone, 
 			String address) {
 		super();
 		this.userId = USER_ID;
@@ -44,6 +46,58 @@ public class Employee implements Comparable<Employee> {
 		return userId;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void printCurrentAttribute() {
+		
+		System.out.println("departmentId: " + departmentId);
+		System.out.println("lastName: " + lastName);
+		System.out.println("firstName: " + firstName);
+		System.out.println("age: " + age);
+		System.out.println("position: " + position);
+		System.out.println("salary: " + salary);
+		System.out.println("email: " + email);
+		System.out.println("address: " + address);
+	}
+	
+	public void setDepartmentId(long departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	@Override
 	public int compareTo(Employee e) {
 		return (int)(getUserId() - e.getUserId());
@@ -56,7 +110,5 @@ public class Employee implements Comparable<Employee> {
 				+ "," + firstName + "," + age + "," + position + "," + salary
 				+ "," + email + "," + phone + "," + address;
 	}
-	
-	
 	
 }	

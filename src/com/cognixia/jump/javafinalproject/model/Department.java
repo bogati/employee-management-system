@@ -1,7 +1,11 @@
 package com.cognixia.jump.javafinalproject.model;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+
+import com.cognixia.jump.javafinalproject.console.EmployeeAttribute;
+import com.cognixia.jump.javafinalproject.console.ValidationAttribute;
 
 public class Department implements Comparable<Department> {
 
@@ -38,17 +42,72 @@ public class Department implements Comparable<Department> {
 	public void remove(Employee e) {
 		if (!employees.contains(e)) return ;
 		employees.remove(e);
+		System.out.println("Remove: " + e);
 	}
 	
-	public void update(Employee o, Employee n) {
-		if (employees.contains(o)) return ;
-		employees.remove(o);
-		employees.add(n);
+	public void update(String attribute, String updateValue, 
+			Employee employee, Department department) {
+		try {
+			EmployeeAttribute epAttribute = 
+					EmployeeAttribute.valueOf(attribute);
+			switch (epAttribute) {
+			case LASTNAME:
+				if (!ValidationAttribute.validWord(updateValue))
+					break;
+				employee.setLastName(updateValue);
+				break;
+			case FIRSTNAME:
+				if (!ValidationAttribute.validWord(updateValue))
+					break;
+				employee.setFirstName(updateValue);
+				break;
+			case AGE:
+				if (!ValidationAttribute.validWord(updateValue))
+					break;
+				int age = Integer.parseInt(updateValue);
+				employee.setAge(age);
+				break;
+			case POSITION:
+				if (!ValidationAttribute.validWord(updateValue))
+					break;
+				employee.setPosition(updateValue);
+				break;
+			case SALARY:
+				double salary = Double.parseDouble(updateValue);
+				employee.setSalary(salary);
+				break;
+			case EMAIL:
+				if (!ValidationAttribute.validEmail(updateValue))
+					break;
+				employee.setEmail(updateValue);
+				break;
+			case PHONE:
+				if (!ValidationAttribute.validPhone(updateValue))
+					break;
+				employee.setPhone(updateValue);
+				break;
+			case ADDRESS:
+				if (!ValidationAttribute.validAddress(updateValue))
+					break;
+				employee.setAddress(updateValue);
+				break;
+			default:
+				System.out.println("Default attribute categlory");
+				break;
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println("Wrong department attribute categlory");
+		}
+
 	}
 
 	public void list() {
 		if (employees.size() == 0) return ;
 		employees.forEach(System.out::println);
+	}
+	
+	public int numOfEmployee() {
+		return employees.size();
 	}
 	
 	// Getter and Setter methods
@@ -60,6 +119,50 @@ public class Department implements Comparable<Department> {
 		return name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setBudget(long budget) {
+		this.budget = budget;
+	}
+
+	public void printCurrentAttribute() {
+		
+		System.out.println("Name: " + name);
+		System.out.println("phone: " + phone);
+		System.out.println("address: " + address);
+		System.out.println("budget: " + budget);
+	}
+	
+	
+	
+	public Employee findEmployee(long userId) {
+		
+		Optional<Employee> employee = employees.parallelStream()
+			.filter(emp -> emp.getUserId() == userId)
+			.findFirst();
+		if (employee.isEmpty()) return null;
+		else return employee.get();
+	}
+	
+	public Employee findEmployee(String email) {
+		
+		Optional<Employee> employee = employees.parallelStream()
+			.filter(emp -> emp.getEmail().equalsIgnoreCase(email))
+			.findFirst();
+		if (employee.isEmpty()) return null;
+		else return employee.get();
+	}
+	
     @Override
     public int compareTo(Department d) {
     	return (int)(getDepartmentId() - d.getDepartmentId());
@@ -69,5 +172,10 @@ public class Department implements Comparable<Department> {
 	public String toString() {
 		return departmentId + "," + name + "," + phone + ","
 				+ address + "," + budget;
+	}
+	
+	public String toString1() {
+		return departmentId + "," + name + "," + phone + ","
+				+ address + "," + budget + employees;
 	}
 }
