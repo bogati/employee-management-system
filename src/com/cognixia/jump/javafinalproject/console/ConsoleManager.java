@@ -217,14 +217,16 @@ public class ConsoleManager {
 	
 	private String selectCateglory() {
 		
-		System.out.println(Questions.SELECT_CATEGORY);
-		Stream.of(Questions.CATEGORY).forEach(q -> System.out.print(q + " "));
-		String categlory = scan.next().toUpperCase();
-		if (categlory.equalsIgnoreCase(Commands.BACK.name())) return null;
-		if (categlory == null || 
-				!Stream.of(Questions.CATEGORY).anyMatch(categlory::equalsIgnoreCase))
-			selectCateglory();
-		return categlory;
+		while (true) {
+			System.out.println(Questions.SELECT_CATEGORY);
+			Stream.of(Questions.CATEGORY).forEach(q -> System.out.print(q + " "));
+			String category = scan.next();
+			if (category.equalsIgnoreCase(Commands.BACK.name())) return null;
+			if (Stream.of(Questions.CATEGORY)
+			.anyMatch(category::equalsIgnoreCase)) {
+				return category;
+			}
+		}
 	}
 	
 	private Department askToFindDepartment() {
