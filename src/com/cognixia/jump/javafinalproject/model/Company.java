@@ -77,7 +77,7 @@ public class Company {
 
 	public void list() {
 		if (departments.size() == 0) return ;
-		departments.parallelStream().forEach(System.out::println);
+		departments.forEach(System.out::println);
 	}
 	
 	public Set<Department> getDepartments() {

@@ -276,7 +276,7 @@ public class ConsoleManager {
 		return sb.toString();
 	}
 	
-	//TODO temp for testing
+
 	private boolean validationCheck(String updateValue, String categlory, int index) {
 		
 		if (categlory.equalsIgnoreCase(Questions.CATEGORY[0]))				
@@ -287,9 +287,6 @@ public class ConsoleManager {
 	private boolean validateEmployee(String updateValue, int index) {
 		EmployeeAttribute[] epAttribute = 
 				EmployeeAttribute.values();
-		System.out.println(Arrays.asList(epAttribute));
-		System.out.println("UpdateValue: "+ updateValue + " index: " + index);
-		System.out.println("attribute: " + epAttribute[index]);
 		switch (epAttribute[index]) {
 		case FIRSTNAME:
 			if (ValidationAttribute.validWord(updateValue))
@@ -300,7 +297,8 @@ public class ConsoleManager {
 				return true;
 			break;
 		case AGE:
-			if (ValidationAttribute.validNumber(updateValue))
+			if (ValidationAttribute.validNumber(updateValue)
+					&& ValidationAttribute.validAge(updateValue))
 				return true;
 			break;
 		case POSITION:

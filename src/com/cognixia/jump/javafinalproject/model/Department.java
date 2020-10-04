@@ -62,7 +62,8 @@ public class Department implements Comparable<Department> {
 				employee.setFirstName(updateValue);
 				break;
 			case AGE:
-				if (!ValidationAttribute.validNumber(updateValue))
+				if (!ValidationAttribute.validNumber(updateValue)
+						|| !ValidationAttribute.validAge(updateValue))
 					break;
 				int age = Integer.parseInt(updateValue);
 				employee.setAge(age);
