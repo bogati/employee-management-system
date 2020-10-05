@@ -59,7 +59,7 @@ public class Employee implements Comparable<Employee> {
 		System.out.println("position: " + position);
 		System.out.println("salary: " + salary);
 		System.out.println("email: " + email);
-		System.out.println("address: " + address);
+		System.out.println("address: " + address + "\n");
 	}
 	
 	public void setDepartmentId(long departmentId) {

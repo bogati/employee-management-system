@@ -119,7 +119,7 @@ public class ConsoleManager {
 			System.out.println(Questions.REMOVE_EMPLOYEE);
 			Employee employee = askToFindEmployee(department);
 			if (employee == null) return ;
-			department.remove(employee);
+			department.remove(employee, false);
 		} else {
 			company.remove(department);
 		}
@@ -155,8 +155,7 @@ public class ConsoleManager {
 			String line = scan.next();
 			if (line.equalsIgnoreCase(Commands.BACK.name())) return ;
 			answers = Arrays.asList(line.split(" "));
-			System.out.println("line: " + line);
-			System.out.println("answers" + answers);
+
 			if (answers.size() == 2) {
 				final String attribute = answers.get(0).toUpperCase();
 				final String updateValue = 
@@ -167,7 +166,7 @@ public class ConsoleManager {
 					Department newDepartment = company.findDepartment(departmentId);
 					if (newDepartment == null) return ;
 					newDepartment.add(employee);
-					department.remove(employee);
+					department.remove(employee, true);
 					employee.setDepartmentId(departmentId);
 				} else department.update(attribute, 
 						updateValue, employee);
@@ -231,42 +230,45 @@ public class ConsoleManager {
 	
 	private Department askToFindDepartment() {
 		
-		System.out.println("Enter the deparment name/id");
-		String line = scan.next();
-		if (line.equalsIgnoreCase(Commands.BACK.name())) return null;
-		Department department;
-	    try {
-			long departmentId = Long.parseLong(line);
-			department = company.findDepartment(departmentId);
-	    } catch (NumberFormatException e) {
-	        department = company.findDepartment(line);
-	    }
-	    if (department == null) {
-	    	System.out.println("Cannot find that department, please try again \n"
-	    			+ "Enter back to got back to the main selection");
-	    	askToFindDepartment();
-	    }
-	    return department;
+		while (true) {
+			
+			System.out.println("Enter the deparment name/id");
+			String line = scan.next();
+			if (line.equalsIgnoreCase(Commands.BACK.name())) return null;
+			Department department;
+			try {
+				long departmentId = Long.parseLong(line);
+				department = company.findDepartment(departmentId);
+			} catch (NumberFormatException e) {
+				department = company.findDepartment(line);
+			}
+			if (department != null) {
+				return department;
+			}
+			System.out.println("Cannot find that department, please try again \n"
+					+ "Enter back to got back to the main selection");
+		}
 	}
 	
 	private Employee askToFindEmployee(Department department) {
 		
-		System.out.println("Enter the Employee UserId/Email");
-		String line = scan.next();
-		if (line.equalsIgnoreCase(Commands.BACK.name())) return null;
-		Employee employee;
-	    try {
-			long userId = Long.parseLong(line);
-			employee = department.findEmployee(userId);
-	    } catch (NumberFormatException e) {
-	        employee = department.findEmployee(line);
-	    }
-	    if (employee == null) {
-	    	System.out.println("Cannot find that employee, please try again \n"
-	    			+ "Enter back to got back to the main selection");
-	    	askToFindEmployee(department);
-	    }
-	    return employee;
+		while (true) {			
+			System.out.println("Enter the Employee UserId/Email\n");
+			String line = scan.next();
+			if (line.equalsIgnoreCase(Commands.BACK.name())) return null;
+			Employee employee = null;
+			try {
+				long userId = Long.parseLong(line);
+				employee = department.findEmployee(userId);
+			} catch (NumberFormatException e) {
+				employee = department.findEmployee(line);
+			}
+			if (employee != null) {
+				return employee;	    	
+			}
+			System.out.println("Cannot find that employee, please try again \n"
+					+ "Enter back to got back to the main selection");
+		}
 	}
 	
 	private String addressFromAnswer() {

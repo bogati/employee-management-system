@@ -39,10 +39,11 @@ public class Department implements Comparable<Department> {
 		employees.add(e);
 	}
 	
-	public void remove(Employee e) {
+	public void remove(Employee e, boolean isUpdate) {
 		if (!employees.contains(e)) return ;
 		employees.remove(e);
-		System.out.println("Remove: " + e);
+		if (isUpdate) System.out.println("Update department of: " + e);
+		else System.out.println("Remove: " + e);
 	}
 	
 	public void update(String attribute, String updateValue, 
@@ -147,7 +148,7 @@ public class Department implements Comparable<Department> {
 		System.out.println("Name: " + name);
 		System.out.println("phone: " + phone);
 		System.out.println("address: " + address);
-		System.out.println("budget: " + budget);
+		System.out.println("budget: " + budget + "\n");
 	}
 	
 	
