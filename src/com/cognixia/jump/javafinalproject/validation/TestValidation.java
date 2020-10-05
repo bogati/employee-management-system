@@ -22,7 +22,7 @@ class TestValidation {
 		);*/
 		assertTrue(comV.validateInput("jud.doe@email.com", Regexes.EMAIL));
 		assertTrue(comV.validateInput("mae@gmail.com", Regexes.EMAIL));
-		assertTrue(!comV.validateInput("jud.doe@gmail.co", Regexes.EMAIL));
+		assertFalse(comV.validateInput("jud.doe@gmail.co", Regexes.EMAIL));
 
 	}
 
@@ -38,8 +38,8 @@ class TestValidation {
 		);
 		*/
 		assertTrue(comV.validateInput("555-555-5555", Regexes.PHONE));
-		assertTrue(!comV.validateInput("55-555-555555", Regexes.PHONE));
-		assertTrue(!comV.validateInput("1-546-454-4846", Regexes.PHONE));
+		assertFalse(comV.validateInput("55-555-555555", Regexes.PHONE));
+		assertFalse(comV.validateInput("1-546-454-4846", Regexes.PHONE));
 	}
 
 	@Test
@@ -54,7 +54,7 @@ class TestValidation {
 		);
 		*/
 		assertTrue(comV.validateInput("123 Stillbrew Ln", Regexes.ADDRESS));
-		assertTrue(!comV.validateInput("Mill Brooks Ave", Regexes.ADDRESS));
+		assertFalse(comV.validateInput("Mill Brooks Ave", Regexes.ADDRESS));
 		assertTrue(comV.validateInput("34 Mills tk", Regexes.ADDRESS));
 	}
 
