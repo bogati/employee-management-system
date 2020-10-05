@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import com.cognixia.jump.javafinalproject.console.DepartmentAttribute;
-import com.cognixia.jump.javafinalproject.console.ValidationAttribute;
+import com.cognixia.jump.javafinalproject.validation.ValidationAttribute;
 
 public class Company {
 
@@ -61,7 +61,7 @@ public class Company {
 				department.setAddress(updateValue);
 				break;
 			case BUDGET:
-				if (!ValidationAttribute.validBudget(updateValue))
+				if (!ValidationAttribute.validNumber(updateValue))
 					break ;
 				long budget = Long.parseLong(updateValue);
 				department.setBudget(budget);
@@ -77,7 +77,7 @@ public class Company {
 
 	public void list() {
 		if (departments.size() == 0) return ;
-		departments.parallelStream().forEach(System.out::println);
+		departments.forEach(System.out::println);
 	}
 	
 	public Set<Department> getDepartments() {
