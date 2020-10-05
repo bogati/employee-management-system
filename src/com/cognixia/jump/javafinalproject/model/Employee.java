@@ -1,7 +1,5 @@
 package com.cognixia.jump.javafinalproject.model;
 
-import java.util.Optional;
-
 public class Employee implements Comparable<Employee> {
 	private static long USER_ID = 1;
 	private long userId;
