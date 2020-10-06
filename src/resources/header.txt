@@ -1,0 +1,28 @@
+::::::::::: ::::::::::     :::     ::::    ::::        ::::::::  
+    :+:     :+:          :+: :+:   +:+:+: :+:+:+      :+:    :+: 
+    +:+     +:+         +:+   +:+  +:+ +:+:+ +:+            +:+  
+    +#+     +#++:++#   +#++:++#++: +#+  +:+  +#+          +#+    
+    +#+     +#+        +#+     +#+ +#+       +#+        +#+      
+    #+#     #+#        #+#     #+# #+#       #+#       #+#       
+    ###     ########## ###     ### ###       ###      ########## 
+    
+    Hello, welcome to Team 2
+    
+    Please chose one of the commands:
+	
+	ADD -> add new department/employee
+	
+	UPDATE -> update department/employee
+	
+	REMOVE -> remove department/employee
+	
+	LIST -> list department/employee
+	
+	EXIT -> close the program
+	
+	HELP -> display the instructions
+	
+	BACK -> back to this menu
+	
+	
+	
