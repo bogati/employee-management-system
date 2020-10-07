@@ -48,7 +48,7 @@ public class ConsoleManager {
 		final int addQuestionsLength = question.length;
 		for (int i = 0; i < addQuestionsLength; i++) {
 			System.out.println(question[i]);
-			answer = scan.next();
+			answer = scan.next().strip();
 			if (answer.equalsIgnoreCase(Commands.BACK.name())) {
 				return ;
 			}
@@ -152,7 +152,7 @@ public class ConsoleManager {
 		while(true) {
 			employee.printCurrentAttribute();
 			System.out.println(Questions.UPDATE_EMPLOYEE);
-			String line = scan.next();
+			String line = scan.next().strip();
 			if (line.equalsIgnoreCase(Commands.BACK.name())) return ;
 			answers = Arrays.asList(line.split(" "));
 			System.out.println("line: " + line);
@@ -180,7 +180,7 @@ public class ConsoleManager {
 		while(true) {
 			department.printCurrentAttribute();
 			System.out.println(Questions.UPDATE_DEPARTMENT);
-			String line = scan.next();
+			String line = scan.next().strip();
 			if (line.equalsIgnoreCase(Commands.BACK.name())) return ;
 			answers = Arrays.asList(line.split(" "));
 			if (answers.size() >= 2) {
@@ -200,14 +200,15 @@ public class ConsoleManager {
 	
 	public void list() {
 		
-		String categlory = selectCateglory();
-		if (categlory == null) return ;
-		if (categlory.equalsIgnoreCase(Questions.CATEGORY[0])) {
+		String category = selectCateglory();	
+		if (category == null) return ;
+		if (category.equalsIgnoreCase(Questions.CATEGORY[0])) { //if you entered employee
 			Department department = askToFindDepartment();
 			if (department == null) return;
 			department.list();
 		} else {
 			company.list();
+			System.out.println();
 		}
 	}
 	
@@ -218,9 +219,9 @@ public class ConsoleManager {
 	private String selectCateglory() {
 		
 		while (true) {
-			System.out.println(Questions.SELECT_CATEGORY);
+			System.out.println("\n" + Questions.SELECT_CATEGORY);
 			Stream.of(Questions.CATEGORY).forEach(q -> System.out.print(q + " "));
-			String category = scan.next();
+			String category = scan.next().strip();
 			if (category.equalsIgnoreCase(Commands.BACK.name())) return null;
 			if (Stream.of(Questions.CATEGORY)
 			.anyMatch(category::equalsIgnoreCase)) {
@@ -232,7 +233,7 @@ public class ConsoleManager {
 	private Department askToFindDepartment() {
 		
 		System.out.println("Enter the deparment name/id");
-		String line = scan.next();
+		String line = scan.next().strip();
 		if (line.equalsIgnoreCase(Commands.BACK.name())) return null;
 		Department department;
 	    try {
