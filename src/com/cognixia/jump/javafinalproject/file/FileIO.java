@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class FileIO {
 	// use FileIO.departmentFile and FileIO.employeeFile
-	final static String departmentFile = "resources/departmentFile.csv";
+	final static String departmentFile = "src/resources/departmentFile.csv";
 	final static String employeeFile =  "resources/employeeFile.csv";
 	
 //	Set<Employee> hash_Set = new HashSet();
@@ -87,6 +87,7 @@ public class FileIO {
 			String email = row_values[7];
 			String phone = row_values[8];
 			String address = row_values[9];
+			System.out.println("ID: " + departmentId);
 			if (department == null || departmentId != department.getDepartmentId()) {
 				department = company.findDepartment(departmentId);
 			}
@@ -134,6 +135,7 @@ public class FileIO {
 		while (inputStream.hasNext()) {
 			// data = 1 row
 			String data = inputStream.next();
+			
 			// use split that returns string of arrays
 			String row_values[] = data.split(",");
 			try {
@@ -141,7 +143,8 @@ public class FileIO {
 				String name = row_values[1];
 				String phone = row_values[2];
 				String address = row_values[3];
-				long budget = Long.parseLong(row_values[4]);
+				long budget = Long.parseLong(row_values[4].strip());
+				
 				company.add(new Department(departmentId, name, phone, address, budget));
 
 			} catch (NumberFormatException e) {

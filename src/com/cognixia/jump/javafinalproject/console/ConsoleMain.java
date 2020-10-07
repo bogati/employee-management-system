@@ -13,7 +13,7 @@ import com.cognixia.jump.javafinalproject.model.*;
 public class ConsoleMain {
 	
 	
-	public static String HEADER_FILEPATH = "resources/header.txt";
+	public static String HEADER_FILEPATH = "src/resources/header.txt";
 	public static String SIMPLE_INSTRUCTION = 
 			"Type ADD, UPDATE, REMOVE, LIST to continue \n" +
 			"HELP for more infromation\n\n";
@@ -34,13 +34,14 @@ public class ConsoleMain {
 			line = scan.next();
 			if (line.equalsIgnoreCase("exit"))
 				break ;
-			startConsole(line, consoleManager, instructions);
+			startConsole(line.strip(), consoleManager, instructions);
 		}
 		scan.close();
 		storedCompany(company, file);
 	}
 	
 	private static String displayHeader() {
+		
 		try {
 			File file = new File(HEADER_FILEPATH);
 			FileInputStream fis = new FileInputStream(file);
@@ -62,8 +63,12 @@ public class ConsoleMain {
 	private static void startConsole(String line, 
 			ConsoleManager consoleManger, String instructions) {
 		
-		try  {
+		
+		try  {	
+			//System.out.println();
+			
 			Commands command = Commands.valueOf(line.toUpperCase());
+			
 			switch (command) {
 			case ADD:
 				consoleManger.add();
@@ -84,7 +89,7 @@ public class ConsoleMain {
 				break;
 			}
 		} catch (IllegalArgumentException e) {
-			System.out.println("Wrong command categlory");
+			System.out.println("Wrong command category");
 		}
 	}
 	
