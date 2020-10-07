@@ -13,7 +13,7 @@ import com.cognixia.jump.javafinalproject.model.*;
 public class ConsoleMain {
 	
 	
-	public static String HEADER_FILEPATH = "src/resources/header.txt";
+	public static String HEADER_FILEPATH = "resources/header.txt";
 	public static String SIMPLE_INSTRUCTION = 
 			"Type ADD, UPDATE, REMOVE, LIST to continue \n" +
 			"HELP for more infromation\n\n";

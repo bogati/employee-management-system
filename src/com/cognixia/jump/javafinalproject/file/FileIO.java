@@ -87,7 +87,7 @@ public class FileIO {
 			String email = row_values[7];
 			String phone = row_values[8];
 			String address = row_values[9];
-			System.out.println("ID: " + departmentId);
+			
 			if (department == null || departmentId != department.getDepartmentId()) {
 				department = company.findDepartment(departmentId);
 			}
