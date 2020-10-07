@@ -45,7 +45,7 @@ public class CompanyValidation {
 			
 			return ( addr1.matcher(str).matches() ||
 				     addr2.matcher(str).matches() ||
-				     addr3.matcher(str).matches());
+				     addr3.matcher(str).matches() );
 		}
 		
 		Pattern pattern = Pattern.compile(reg.getRegex());
