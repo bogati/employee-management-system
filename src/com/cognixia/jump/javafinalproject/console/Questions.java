@@ -3,12 +3,12 @@ package com.cognixia.jump.javafinalproject.console;
 public final class Questions {
 
 	public static final String SELECT_CATEGORY = 
-			"Please chose one categlory, or type 'BACK' go back to main select";
+			"Please chose one category, or type 'BACK' go back to main select";
 	
 	public static final String[] CATEGORY = {
 			"Employee",
 			"Department",
-			"\n\n"
+			"\n"
 	};
 	
 	public static final String[] ADD_EMPLOYEE = {
